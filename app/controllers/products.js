@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
 
   reset: function () {
     this.setProperties({
-      newProductName: '',
+      newProductName: null,
       newProductFat: null,
       newProductProtein: null,
       newProductCarbs: null,
@@ -19,14 +19,33 @@ export default Ember.Controller.extend({
   actions: {
     createProduct() {
       let product = this.store.createRecord('product');
-      product.setProperties({
-        name: this.get('newProductName'),
-        fat: this.get('newProductFat'),
-        carbs: this.get('newProductCarbs'),
-        protein: this.get('newProductProtein'),
-        calories: this.get('newProductCalories')
+        product.setProperties({
+          name: this.get('newProductName'),
+          fat: this.get('newProductFat'),
+          carbs: this.get('newProductCarbs'),
+          protein: this.get('newProductProtein'),
+          calories: this.get('newProductCalories')
+        });
+        product.save();
+    },
+
+    deleteProduct(product) {
+      product.destroyRecord();
+    },
+
+    editProduct(product) {
+      product.set('isEditing', true);
+    },
+
+    updateProduct(product) {
+      product.save().then(()=>{
+        product.set('isEditing', false);
       });
-      product.save();
+    },
+
+    cancel(product) {
+      product.set('isEditing', false);
+      product.rollback();
     }
   }
 });

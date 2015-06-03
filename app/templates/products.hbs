@@ -1,4 +1,4 @@
-<div class='col-md-6 col-md-offset-3'>
+<div class='col-md-8 col-md-offset-2'>
   <form class="form-inline">
     <div class="form-group">
       {{input type='text' value=newProductName class='form-control' placeholder='Name'}}
@@ -23,17 +23,36 @@
         <th>Carbs</th>
         <th>Proteins</th>
         <th>Calories</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       {{#each product in products}}
-        <tr>
-          <td>{{product.name}}</td>
-          <td>{{product.fat}}</td>
-          <td>{{product.carbs}}</td>
-          <td>{{product.protein}}</td>
-          <td>{{product.calories}}</td>
-        </tr>
+        {{#if product.isEditing}}
+          <tr>
+            <td>{{input type='text' class='form-control'value=product.name}}</td>
+            <td>{{input type='text' class='form-control'value=product.fat}}</td>
+            <td>{{input type='text' class='form-control'value=product.carbs}}</td>
+            <td>{{input type='text' class='form-control'value=product.protein}}</td>
+            <td>{{product.calories}}</td>
+            <td>
+              <button class='btn btn-success' {{action 'updateProduct' product}}>Save</button>
+              <button class='btn btn-danger' {{action 'cancel' product}}>Cancel</button>
+            </td>
+          </tr>
+        {{else}}
+          <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.fat}}</td>
+            <td>{{product.carbs}}</td>
+            <td>{{product.protein}}</td>
+            <td>{{product.calories}}</td>
+            <td>
+              <button class='btn btn-success' {{action 'editProduct' product}}>Edit</button>
+              <button class='btn btn-danger' {{action 'deleteProduct' product}}>Delete</button>
+            </td>
+          </tr>
+        {{/if}}
       {{/each}}
     </tbody>
   </table>
