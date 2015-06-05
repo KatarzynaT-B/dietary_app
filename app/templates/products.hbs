@@ -1,50 +1,41 @@
 <div class='col-md-3 col-md-offset-1'>
-  <h3>Add new product</h3>
-  <div class="well well-lg">
-    {{partial 'product-form'}}
+  <h3>Available products</h3>
+  <div class='well well-lg'>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Calories</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each product in products}}
+          <tr>
+            <td>{{#link-to 'products.product' product}}{{product.name}}{{/link-to}}</td>
+            <td>{{product.calories}}</td>
+            <td>
+              <button {{action 'deleteProduct' product}} class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              </button>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </div>
 </div>
 
-<div class='col-md-6 col-md-offset-1'>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Fat</th>
-        <th>Carbs</th>
-        <th>Proteins</th>
-        <th>Calories</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each product in products}}
-        {{#if product.isEditing}}
-          <tr>
-            <td>{{input type='text' class='form-control'value=product.name}}</td>
-            <td>{{input type='text' class='form-control'value=product.fat}}</td>
-            <td>{{input type='text' class='form-control'value=product.carbs}}</td>
-            <td>{{input type='text' class='form-control'value=product.protein}}</td>
-            <td>{{product.calories}}</td>
-            <td>
-              <button class='btn btn-success' {{action 'updateProduct' product}}>Save</button>
-              <button class='btn btn-danger' {{action 'cancel' product}}>Cancel</button>
-            </td>
-          </tr>
-        {{else}}
-          <tr>
-            <td>{{product.name}}</td>
-            <td>{{product.fat}} g</td>
-            <td>{{product.carbs}} g</td>
-            <td>{{product.protein}} g</td>
-            <td>{{product.calories}} kcal</td>
-            <td>
-              <button class='btn btn-success' {{action 'editProduct' product}}>Edit</button>
-              <button class='btn btn-danger' {{action 'deleteProduct' product}}>Delete</button>
-            </td>
-          </tr>
-        {{/if}}
-      {{/each}}
-    </tbody>
-  </table>
+<div class='col-md-4'>
+  {{outlet}}
+</div>
+
+<div class='col-md-3'>
+  <h3>Add new product</h3>
+  <div class="well well-lg">
+    {{product-form product=newProduct
+                   saveProductWithUnits='saveProductWithUnits'
+                   addUnit='addUnit'
+                   cancel='cancel'}}
+  </div>
 </div>

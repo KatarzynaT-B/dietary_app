@@ -1,0 +1,53 @@
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-md-3 control-label">Name</label>
+    <div class='col-md-9'>
+      {{input type='text' value=product.name class='form-control' placeholder='Name'}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-3 control-label">Fat</label>
+    <div class='col-md-9'>
+      {{input type='number' value=product.fat class='form-control' placeholder='Fat'}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-3 control-label">Carbs</label>
+    <div class='col-md-9'>
+      {{input type='number' value=product.carbs class='form-control' placeholder='Carbs'}}
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-3 control-label">Proteins</label>
+    <div class='col-md-9'>
+      {{input type='number' value=product.protein class='form-control' placeholder='Proteins'}}
+    </div>
+  </div>
+  <div class='col-md-9 col-md-offset-3'>
+    <div class="form-group">
+      <strong>Add base units for this product:</strong>
+      <button {{action 'addUnit'}} class="btn btn-success pull-right">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+  {{#each unit in units}}
+    <div class='form-group'>
+      <div class='col-md-5 col-md-offset-1'>
+        {{input type='text' value=unit.name class='form-control' placeholder='Name'}}
+      </div>
+      <div class='col-md-4'>
+        {{input type='number' value=unit.weight class='form-control' placeholder='Weight in g'}}
+      </div>
+      <button {{action 'removeUnit' unit}} class="btn btn-danger">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </button>
+    </div>
+  {{/each}}
+  <div class="form-group">
+    <div class="pull-right">
+      <button type="submit" class="btn btn-default" {{action 'cancel' product}}>Cancel</button>
+      <button type="submit" class="btn btn-success" {{action 'saveProductWithUnits'}}>Save</button>
+    </div>
+  </div>
+</form>

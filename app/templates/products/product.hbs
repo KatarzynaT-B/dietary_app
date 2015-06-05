@@ -1,0 +1,51 @@
+<h3>{{product.name}}</h3>
+<div class="well well-lg">
+  {{#if product.isEditing}}
+    {{product-form product=product
+                  saveProductWithUnits='saveProductWithUnits'
+                  addUnit='addUnit'
+                  cancel='cancel'}}
+  {{else}}
+    <h3>Per 100g</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Fat</th>
+          <th>Carbs</th>
+          <th>Proteins</th>
+          <th>Calories</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{product.fat}} g</td>
+          <td>{{product.carbs}} g</td>
+          <td>{{product.protein}} g</td>
+          <td>{{product.calories}} kcal</td>
+        </tr>
+      </tbody>
+    </table>
+    {{#if units}}
+      <hr>
+      <h3>Basic measure units:</h3>
+      <table class='table table-striped'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each unit in units}}
+            <tr>
+              <td>{{unit.name}}</td>
+              <td>{{unit.weight}} g</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{/if}}
+    <button class='btn btn-success' {{action 'editProduct' product}}>Edit</button>
+    <button class='btn btn-danger' {{action 'deleteProduct' product}}>Delete</button>
+  {{/if}}
+</div>
