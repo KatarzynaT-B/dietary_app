@@ -6,4 +6,5 @@ export default DS.Model.extend({
   protein:  DS.attr('number'),
   carbs:    DS.attr('number'),
   calories: DS.attr('number'),
+  productUnits:    DS.hasMany('product-unit')
 });
