@@ -42,7 +42,7 @@
       {{/if}}
       <div class='col-md-1'>
         <label class="control-label">Delete</label>
-        <button {{action 'removeIngredient' ingredient}} class="btn btn-danger">
+        <button {{action 'removeDependent' ingredient}} class="btn btn-danger">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </button>
       </div>
@@ -50,7 +50,7 @@
   {{/each}}
   <div class="col-md-12">
   <br>
-  <button {{action 'addIngredient'}} class="btn btn-success pull-right">
+  <button {{action 'addDependentResource'}} class="btn btn-success pull-right">
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     Add ingredient
   </button>
@@ -65,7 +65,7 @@
   <div class="form-group">
     <div class="pull-right">
       <button type="submit" class="btn btn-default btn-lg" {{action 'cancel' product}}>Cancel</button>
-      <button type="submit" class="btn btn-success btn-lg" {{action 'saveRecipeWithIngredients'}}>Save</button>
+      <button type="submit" class="btn btn-success btn-lg" {{action 'saveWithDependentResources'}}>Save</button>
     </div>
     <br>
   </div>

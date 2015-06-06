@@ -1,24 +1,6 @@
-import Ember from 'ember';
+import ResourceForm from './resource-form';
 
-export default Ember.Component.extend({
+export default ResourceForm.extend({
   units: Ember.computed.alias('product.productUnits'),
-
-  actions: {
-
-    addUnit() {
-      this.sendAction('addUnit', this.get('product'));
-    },
-
-    removeUnit(unit) {
-      unit.destroyRecord();
-    },
-
-    saveProductWithUnits() {
-      this.sendAction('saveProductWithUnits', this.get('product'))
-    },
-
-    cancel() {
-      this.sendAction('cancel');
-    }
-  }
+  resource: Ember.computed.alias('product'),
 });

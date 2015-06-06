@@ -2,8 +2,8 @@
 <div class="well well-lg">
   {{#if product.isEditing}}
     {{product-form product=product
-                  saveProductWithUnits='saveProductWithUnits'
-                  addUnit='addUnit'
+                  saveWithDependentResources='saveProductWithUnits'
+                  addDependentResource='addUnit'
                   cancel='cancel'}}
   {{else}}
     <h3>Per 100g</h3>

@@ -1,25 +1,7 @@
-import Ember from 'ember';
+import ResourceForm from './resource-form';
 
-export default Ember.Component.extend({
+export default ResourceForm.extend({
   ingredients: Ember.computed.alias('recipe.ingredients'),
   productNames: Ember.computed.mapBy('products', 'name'),
-
-  actions: {
-
-    addIngredient() {
-      this.sendAction('addIngredient', this.get('recipe'));
-    },
-
-    removeIngredient(ingredient) {
-      ingredient.destroyRecord();
-    },
-
-    saveRecipeWithIngredients() {
-      this.sendAction('saveRecipeWithIngredients', this.get('recipe'));
-    },
-
-    cancel() {
-      this.sendAction('cancel');
-    }
-  }
+  resource: Ember.computed.alias('recipe'),
 });
