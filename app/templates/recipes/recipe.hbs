@@ -1,0 +1,59 @@
+<h3>{{recipe.title}}</h3>
+<div class="well well-lg">
+  {{#if recipe.isEditing}}
+    {{recipe-form recipe=recipe
+                  products=products
+                  addIngredient='addIngredient'
+                  saveRecipeWithIngredients='saveRecipeWithIngredients'
+                  cancel='cancel'}}
+  {{else}}
+    <h3>Nutrition facts:</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Fat</th>
+          <th>Carbs</th>
+          <th>Proteins</th>
+          <th>Calories</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{recipe.fat}} g</td>
+          <td>{{recipe.carbs}} g</td>
+          <td>{{recipe.protein}} g</td>
+          <td>{{recipe.calories}} kcal</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <h3>Ingredients:</h3>
+    <table class='table table-striped'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>How much needed?</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each ingredient in ingredients}}
+          <tr>
+            <td>{{ingredient.product.name}}</td>
+            <td>
+              {{#if ingredient.productUnit}}
+                {{ingredient.amount}} x {{ingredient.productUnit.name}}
+              {{else}}
+                {{ingredient.amount}} g
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <hr>
+    <h3>Description:</h3>
+    <p>{{recipe.description}}</p>
+    <button class='btn btn-success' {{action 'editRecipe' recipe}}>Edit</button>
+    <button class='btn btn-danger' {{action 'deleteRecipe' recipe}}>Delete</button>
+  {{/if}}
+</div>

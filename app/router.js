@@ -9,5 +9,8 @@ export default Router.map(function() {
   this.route('products', function () {
     this.route('product', {path: '/:product_id'});
   });
-  this.route('recipes');
+  this.route('recipes', function () {
+    this.route('recipe', {path: '/:recipe_id'});
+    // this.route('new', {path: '/new'});
+  });
 });

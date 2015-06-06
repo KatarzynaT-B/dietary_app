@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   product: Ember.computed.alias('model'),
   units: Ember.computed.alias('model.productUnits'),
 
-  reset: function () {
+  setup: function () {
     this.setProperties({
       isEditing: false,
     });
@@ -30,7 +30,6 @@ export default Ember.Controller.extend({
     saveProductWithUnits(product) {
       product.saveWithUnits();
       product.set('isEditing', false);
-      // this.transitionTo('products');
     },
 
     cancel() {

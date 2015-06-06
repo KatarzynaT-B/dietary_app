@@ -1,0 +1,72 @@
+<form class="form">
+  <div class="form-group">
+    <label class="control-label">Title</label>
+    {{input type='text' value=recipe.title class='form-control' placeholder='Title'}}
+  </div>
+  <hr />
+  <h3>Ingredients:</h3>
+  {{#each ingredient in ingredients}}
+    <div class="form-group">
+      {{#if ingredient.product.productUnits}}
+        <div class='col-md-4'>
+          <label class="control-label">Product</label>
+            {{view "select" content=products
+                            optionLabelPath='content.name'
+                            value=ingredient.product
+                            class="form-control"}}
+        </div>
+        <div class='col-md-4'>
+          <label class="control-label">Unit</label>
+            {{view 'select' content=ingredient.product.productUnits
+                            optionLabelPath='content.name'
+                            value=ingredient.productUnit
+                            class="form-control"
+                            prompt="Don't select"}}
+        </div>
+        <div class='col-md-3'>
+          <label class="control-label">How many</label>
+            {{input type='number' value=ingredient.amount class='form-control' placeholder='Amount'}}
+        </div>
+      {{else}}
+        <div class='col-md-8'>
+          <label class="control-label">Product</label>
+            {{view "select" content=products
+                            optionLabelPath='content.name'
+                            value=ingredient.product
+                            class="form-control"}}
+        </div>
+        <div class='col-md-3'>
+          <label class="control-label">How much?</label>
+            {{input type='number' value=ingredient.amount class='form-control' placeholder='Amount'}}
+        </div>
+      {{/if}}
+      <div class='col-md-1'>
+        <label class="control-label">Delete</label>
+        <button {{action 'removeIngredient' ingredient}} class="btn btn-danger">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  {{/each}}
+  <div class="col-md-12">
+  <br>
+  <button {{action 'addIngredient'}} class="btn btn-success pull-right">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    Add ingredient
+  </button>
+  </div>
+  <hr />
+  <h3>Description:</h3>
+  <div class='form-group'>
+    <div>
+      {{textarea value=recipe.description class='form-control' placeholder='Description'}}
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="pull-right">
+      <button type="submit" class="btn btn-default btn-lg" {{action 'cancel' product}}>Cancel</button>
+      <button type="submit" class="btn btn-success btn-lg" {{action 'saveRecipeWithIngredients'}}>Save</button>
+    </div>
+    <br>
+  </div>
+</form>

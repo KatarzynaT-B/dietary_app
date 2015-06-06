@@ -5,7 +5,8 @@ export default Ember.Controller.extend({
 
   setup: function () {
     this.setProperties({
-      newProduct: this.store.createRecord('product')
+      newProduct: this.store.createRecord('product'),
+      isAddingProduct: false
     });
   }.on('init'),
 
@@ -17,6 +18,7 @@ export default Ember.Controller.extend({
 
     saveProductWithUnits(product) {
       product.saveWithUnits();
+      this.transitionTo('products.product', this.get('newProduct.id'));
       this.setup();
     },
 
@@ -28,6 +30,10 @@ export default Ember.Controller.extend({
       this.store.createRecord('product-unit', {
         product: product
       });
+    },
+
+    toggleAddingProduct() {
+      this.set('isAddingProduct', !this.get('isAddingProduct'));
     }
   }
 });

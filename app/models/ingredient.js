@@ -1,7 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  name:        DS.attr('string'),
-  unit:        DS.belongsTo('unit'),
-  ingredients: DS.hasMany('ingredient')
+  amount:      DS.attr('number'),
+  product:     DS.belongsTo('product'),
+  productUnit: DS.belongsTo('product-unit'),
+  recipe:      DS.belongsTo('recipe')
 });
